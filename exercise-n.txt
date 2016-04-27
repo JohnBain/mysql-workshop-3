@@ -367,3 +367,244 @@ EXERCISE 4
 ==========================================================================
 
 
+mysql> select * from AddressBook where name="Pharetra Ut Limited";
++----+-----------+---------------------+---------------------+---------------------+
+| id | accountId | name                | createdOn           | modifiedOn          |
++----+-----------+---------------------+---------------------+---------------------+
+| 10 |        88 | Pharetra Ut Limited | 2016-05-23 06:09:38 | 2016-05-10 09:47:12 |
++----+-----------+---------------------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select CONCAT(TRIM(TRAILING substring(firstName, -1) FROM firstName), UPPER(RIGHT(firstName, 1))) from Entry where addressBookId=88;
++--------------------------------------------------------------------------------------------+
+| CONCAT(TRIM(TRAILING substring(firstName, -1) FROM firstName), UPPER(RIGHT(firstName, 1))) |
++--------------------------------------------------------------------------------------------+
+| JustinE                                                                                    |
+| TaneK                                                                                      |
+| KayE                                                                                       |
+| KirK                                                                                       |
+| ZacherY                                                                                    |
+| KaY                                                                                        |
+| RoarY                                                                                      |
+| IolA                                                                                       |
+| KimberleY                                                                                  |
+| JerrY                                                                                      |
+| PaulA                                                                                      |
+| HayeS                                                                                      |
+| CharlottE                                                                                  |
+| KevyN                                                                                      |
+| DaceY                                                                                      |
+| IvorY                                                                                      |
+| KirbY                                                                                      |
+| PalomA                                                                                     |
+| ColettE                                                                                    |
+| ShaD                                                                                       |
+| EzekieL                                                                                    |
+| EagaN                                                                                      |
+| JoaN                                                                                       |
+| RandaL                                                                                     |
+| ChristeN                                                                                   |
+| BiancA                                                                                     |
+| TyleR                                                                                      |
+| ForresT                                                                                    |
+| AN                                                                                         |
+| PatriciA                                                                                   |
+| GracE                                                                                      |
+| BoriS                                                                                      |
+| JaquelyN                                                                                   |
+| KaI                                                                                        |
+| TaShyA                                                                                     |
+| XenA                                                                                       |
+| NaidA                                                                                      |
+| RhodA                                                                                      |
+| CiaraN                                                                                     |
+| JareD                                                                                      |
+| RaphaeL                                                                                    |
+| MarshaL                                                                                    |
+| JadeN                                                                                      |
+| OrlA                                                                                       |
+| BlainE                                                                                     |
+| ChristiaN                                                                                  |
+| ShoshanA                                                                                   |
+| KeitH                                                                                      |
+| SawyeR                                                                                     |
+| MartiN                                                                                     |
+| AngelicA                                                                                   |
+| SigourneY                                                                                  |
+| TatianA                                                                                    |
+| MercedeS                                                                                   |
+| EugeniA                                                                                    |
+| XandrA                                                                                     |
+| BrendaN                                                                                    |
+| ZeuS                                                                                       |
+| BrandoN                                                                                    |
+| BrookE                                                                                     |
+| CelestE                                                                                    |
+| AlicE                                                                                      |
+| SamueL                                                                                     |
+| IrenE                                                                                      |
++--------------------------------------------------------------------------------------------+
+64 rows in set (0.00 sec)
+
+//It breaks the name "Ann" for some reason... I wanted "AnN", but it returns it as "AN"
+
+==========================================================================
+EXERCISE 5
+==========================================================================
+
+mysql> select * from AddressBook where id=100;
++-----+-----------+----------------+---------------------+---------------------+
+| id  | accountId | name           | createdOn           | modifiedOn          |
++-----+-----------+----------------+---------------------+---------------------+
+| 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
++-----+-----------+----------------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Entry JOIN AddressBook ON AddressBook.id = Entry.addressBookId where AddressBook.id = 100 AND type = "electronic-mail";
++------+---------------+-----------+----------+---------------------+-----------------+-----+-----------+----------------+---------------------+---------------------+
+| id   | addressBookId | firstName | lastName | birthday            | type            | id  | accountId | name           | createdOn           | modifiedOn          |
++------+---------------+-----------+----------+---------------------+-----------------+-----+-----------+----------------+---------------------+---------------------+
+| 4019 |           100 | Sage      | Cline    | 1959-10-05 06:58:43 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4030 |           100 | Aquila    | Workman  | 1986-09-02 16:00:14 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4060 |           100 | Tara      | Mann     | 1958-01-23 00:15:33 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4392 |           100 | Christen  | Russell  | 1978-04-03 02:22:46 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4486 |           100 | Jana      | Martin   | 1965-07-22 18:30:49 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4585 |           100 | Regina    | Ayala    | 1983-08-19 09:57:18 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4593 |           100 | Elmo      | Campos   | 1956-03-27 10:02:50 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4628 |           100 | Bruce     | Sykes    | 1961-12-01 16:03:08 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4680 |           100 | Jana      | Shepherd | 1992-05-26 06:20:08 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 4897 |           100 | Jackson   | Mays     | 1995-05-09 10:40:02 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5021 |           100 | Clarke    | Dickson  | 1976-07-07 15:53:42 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5243 |           100 | Blossom   | Franco   | 1998-01-09 20:24:51 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5292 |           100 | Aristotle | Silva    | 1992-07-29 03:28:05 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5466 |           100 | Nelle     | Jacobs   | 1992-08-27 23:02:43 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5593 |           100 | Camden    | Bartlett | 1985-01-12 03:53:55 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5693 |           100 | Cassidy   | Watkins  | 1951-04-02 21:16:58 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 5775 |           100 | Brent     | Lee      | 1957-03-26 20:14:26 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 6003 |           100 | Nathaniel | Craft    | 1972-11-09 21:12:20 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
+| 6085 |           100 | Josephine | Grant    | 1960-07-23 16:14:25 | electronic-mail | 100 |        69 | Sem Industries | 2016-03-10 23:49:35 | 2014-09-29 12:57:43 |
++------+---------------+-----------+----------+---------------------+-----------------+-----+-----------+----------------+---------------------+---------------------+
+19 rows in set (0.00 sec)
+
+mysql> SELECT content FROM ElectronicMail JOIN Entry ON ElectronicMail.entryId = Entry.id 
+       JOIN AddressBook ON Entry.addressBookId = AddressBook.id AND AddressBook.id = 100;
++--------------------------------------------+
+| content                                    |
++--------------------------------------------+
+| tortor.dictum@Nulla.org                    |
+| malesuada.fames.ac@Sedeu.co.uk             |
+| velit@vestibulum.co.uk                     |
+| tincidunt.congue.turpis@Inmi.net           |
+| vitae.diam@sapienAeneanmassa.com           |
+| Nunc.ac@parturientmontesnascetur.com       |
+| cursus.vestibulum@pellentesqueSeddictum.ca |
+| nibh.Donec.est@nibh.org                    |
+| eu.tellus@ipsum.co.uk                      |
+| massa.Quisque.porttitor@enimSednulla.edu   |
+| mauris.blandit.mattis@Integersemelit.net   |
+| eget@viverraMaecenasiaculis.net            |
+| vulputate.posuere.vulputate@liberoDonec.ca |
+| Nam.tempor@nisimagna.co.uk                 |
++--------------------------------------------+
+14 rows in set (0.00 sec)
+
+
+mysql> select content from ElectronicMail JOIN Entry ON Entry.id = ElectronicMail.entryId id from Entry 
+       JOIN AddressBook ON AddressBook.id = Entry.addressBookId where AddressBook.id = 100 AND type = "electronic-mail";
+//Broken
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id from Entry JOIN AddressBook ON AddressBook.id = Entry.addressBookId where Add' at line 1
+
+mysql> SELECT content FROM ElectronicMail JOIN Entry ON ElectronicMail.entryID = Entry.id JOIN AddressBook ON Entry.addressBookId = AddressBook.id AND AddressBook.id = 100
+//Working
+
+==========================================================================
+EXERCISE 6
+==========================================================================
+
+mysql> select * from Phone JOIN Entry ON Phone.EntryId = Entry.id where Entry.firstName="Charlotte" AND Entry.lastName="Jenkins";                             
++------+---------+-------+----------+----------------+------+---------------+-----------+----------+---------------------+-------+
+| id   | entryId | type  | subtype  | content        | id   | addressBookId | firstName | lastName | birthday            | type  |
++------+---------+-------+----------+----------------+------+---------------+-----------+----------+---------------------+-------+
+|  659 |    1057 | other | fax      | (110) 167-3420 | 1057 |            88 | Charlotte | Jenkins  | 1974-05-29 02:23:14 | phone |
+| 1599 |    1057 | home  | landline | (605) 175-1334 | 1057 |            88 | Charlotte | Jenkins  | 1974-05-29 02:23:14 | phone |
++------+---------+-------+----------+----------------+------+---------------+-----------+----------+---------------------+-------+
+2 rows in set (0.00 sec)
+
+==========================================================================
+EXERCISE 7
+==========================================================================
+
+mysql> select (SUBSTRING_INDEX(SUBSTR(content, INSTR(content, '@') + 1),'randomstring',1)) from ElectronicMail;
+
+//Shows a lot of domain names including URLs. When I originally copied it the function was:
+
+mysql> select distinct (SUBSTRING_INDEX(SUBSTR(content, INSTR(content, '@') + 1),'.',1)) from ElectronicMail;
+
+//Which just shows URL. I still don't really get what's going on here.
+
+mysql> select distinct (SUBSTRING_INDEX(SUBSTR(content, INSTR(content, '@') + 1),'randomstring',1)) from ElectronicMail;                                       
+
+==========================================================================
+EXERCISE 8
+==========================================================================
+
+mysql> select birthday from Entry WHERE birthday BETWEEN "1950-10-01 00:00:00" AND "1960-10-01 00:00:00";
+
+//1146 rows of birthdays
+
+mysql>  select * from Phone JOIN Entry ON Phone.EntryId = Entry.id WHERE birthday BETWEEN "1950-10-01 00:00:00" AND "1960-10-01 00:00:00";
+
+//442 rows of phone numbers, types of phone numbers, and people
+
+mysql> select subtype, COUNT(*) from Phone JOIN Entry ON Phone.EntryId = Entry.id WHERE birthday BETWEEN "1950-10-01 00:00:00" AND "1960-10-31 23:59:59" GROUP BY subtype;
++----------+----------+
+| subtype  | COUNT(*) |
++----------+----------+
+| landline |      172 |
+| cellular |      139 |
+| fax      |      135 |
++----------+----------+
+3 rows in set (0.00 sec)
+
+//Note that I also fixed it to extend through the October of 1960
+
+==========================================================================
+EXERCISE 9
+==========================================================================
+
+//List all Account emails with AddressBook containing Phone numbers with a country code
+
+mysql> SELECT * from Phone WHERE content LIKE "1-%";
+
+//Gives us 200 rows.
+
+SELECT email FROM Account JOIN AddressBook ON AddressBook.accountId = Account.id 
+       JOIN Entry ON AddressBook.id = AddressBook.id = Entry.addressBookId
+       JOIN Phone ON Entry.id = Phone.entryId WHERE Phone.content LIKE "1-%";
+
+// 3300 rows in set (0.00 sec)
+
+
+
+==========================================================================
+EXERCISE 10
+==========================================================================
+
+select concat(firstName, " ", lastName), birthday from Entry where substring(birthday,12, 5) BETWEEN "21:00" AND "22:00" AND birthday NOT LIKE "%-02-%:%:%";
+
+==========================================================================
+EXERCISE 12
+==========================================================================
+
+
+
+==========================================================================
+EXERCISE 13
+==========================================================================
+
+select name, DATEDIFF(createdOn, modifiedOn) AS daysbetweenCreationandModification from AddressBook LIMIT 100;
+SELECT (UNIX_TIMESTAMP(modifiedOn) - UNIX_TIMESTAMP(createdOn))/60/60/24 AS days from AddressBook LIMIT 100;   
+
+//And with this one you can verify that some were indeed modified before they were created.
+
+SELECT name, (UNIX_TIMESTAMP(modifiedOn) - UNIX_TIMESTAMP(createdOn))/60/60/24 AS days, createdOn, modifiedOn from AddressBook LIMIT 100;
