@@ -590,12 +590,49 @@ SELECT email FROM Account JOIN AddressBook ON AddressBook.accountId = Account.id
 EXERCISE 10
 ==========================================================================
 
-select concat(firstName, " ", lastName), birthday from Entry where substring(birthday,12, 5) BETWEEN "21:00" AND "22:00" AND birthday NOT LIKE "%-02-%:%:%";
+select concat(firstName, " ", lastName), birthday from Entry where substring(birthday,12, 5) BETWEEN "20:00:00" AND "21:00:00" AND birthday NOT LIKE "%-02-%:%:%";
+
+//253 rows in set, 1 warning (0.00 sec)
+
+==========================================================================
+EXERCISE 11
+==========================================================================
+//List all of the cities within the countries of Canada, Austria, Isle of Man, Ireland and Japan.
+
+select city, country FROM Address WHERE country IN ("Isle of Man", "Japan", "Canada", "Austria", "Ireland") ORDER BY country;
+
+| Kraków         | Ireland     |   //Marie and I had a couple cities in different countries. We used the exact same command. How?
+| Jackson        | Ireland     |
+| Belfast        | Isle of Man |
+| Pabianice      | Isle of Man |
+| Dover          | Isle of Man |
+| Nagaon         | Isle of Man |
+| Kailua         | Isle of Man |
+| Ceyhan         | Isle of Man |
+| Horsham        | Isle of Man |
+| San Vicente    | Isle of Man |
+| Chartres       | Isle of Man |
+| Bremerhaven    | Isle of Man |
+| Denderbelle    | Isle of Man |
+| Ogbomosho      | Isle of Man |
+| Abbeville      | Japan       |
+| Berlin         | Japan       |
+| Bozeman        | Japan       |
+| Pontevedra     | Japan       |
+| Rzeszów        | Japan       |
+| Houston        | Japan       |
+| ?slahiye       | Japan       |
+| Milena         | Japan       |
++----------------+-------------+
+58 rows in set (0.00 sec)
+
 
 ==========================================================================
 EXERCISE 12
 ==========================================================================
+//List 100 phone numbers in separated parts: country code, area code and line number
 
+select substr(content,1,1) AS countryCode, substr(content,3,3) AS areaCode, substr(content,7,12) AS lineNumber FROM Phone WHERE substr(content, 1, 2) = "1-" LIMIT 100;
 
 
 ==========================================================================
@@ -608,3 +645,19 @@ SELECT (UNIX_TIMESTAMP(modifiedOn) - UNIX_TIMESTAMP(createdOn))/60/60/24 AS days
 //And with this one you can verify that some were indeed modified before they were created.
 
 SELECT name, (UNIX_TIMESTAMP(modifiedOn) - UNIX_TIMESTAMP(createdOn))/60/60/24 AS days, createdOn, modifiedOn from AddressBook LIMIT 100;
+
+==========================================================================
+EXERCISE 14
+==========================================================================
+//Reverse all fax phone numbers, keeping the phone numbers in a valid format
+
+//List all of the new fax phone number values
+
+select reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", ""),"-","")) FROM Phone WHERE subtype = 'fax';
+
+==========================================================================
+EXERCISE 15
+==========================================================================
+//Transform all work emails into home emails and vice versa
+
+
