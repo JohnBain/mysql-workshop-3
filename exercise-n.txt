@@ -655,9 +655,27 @@ EXERCISE 14
 
 select reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", ""),"-","")) FROM Phone WHERE subtype = 'fax';
 
+//I tried using CASE statements to no success here. I did get one simple one to work but I must be missing something syntactically.
+
+//Failed attempt: SELECT CASE LENGTH(content) WHEN 14 
+//THEN reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", ""),"-","")) 
+//END FROM Phone WHERE subtype=‘fax';
+
 ==========================================================================
 EXERCISE 15
 ==========================================================================
 //Transform all work emails into home emails and vice versa
 
+==========================================================================
+EXERCISE 16
+==========================================================================
 
+SELECT INSERT(addressLine1, 1, 4, ROUND(RAND() * 10000)) FROM Address WHERE substr(addressLine1, 1, 1) = 5 AND substr(addressLine1, 5, 1) = " " AND addressLine1 NOT LIKE "%-%" LIMIT 10;     
+
+==========================================================================
+EXERCISE 17
+==========================================================================
+
+//Return a list of adresses ordered by length of the combined columns addressLine1 and city
+
+mysql> select length(concat(addressLine1,city)), concat(addressLine1,city) FROM Address ORDER BY length(concat(addressLine1, city)) DESC;
