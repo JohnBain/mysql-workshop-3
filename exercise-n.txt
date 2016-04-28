@@ -657,22 +657,28 @@ select reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", 
 
 //I tried using CASE statements to no success here. I did get one simple one to work but I must be missing something syntactically.
 
-//Failed attempt: SELECT CASE LENGTH(content) WHEN 14 
-//THEN reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", ""),"-","")) 
-//END FROM Phone WHERE subtype=‘fax';
+Failed attempt: SELECT CASE LENGTH(content) WHEN 14 
+THEN reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", ""),"-","")) 
+END FROM Phone WHERE subtype=‘fax';
 
 ==========================================================================
-* EXERCISE 15
+EXERCISE 15
 ==========================================================================
 //Transform all work emails into home emails and vice versa
 
 //ALTER TABLE does not seem to work
 
+mysql> ALTER TABLE ElectronicMail CHANGE type type enum("work", "home", "other", "placeholder");
+UPDATE ElectronicMail SET type = CASE
+    ->     -> WHEN type = 'work' THEN 'home'
+    ->     -> WHEN type = 'home' THEN 'work'
+    ->     -> END WHERE type='work' OR type='home'
 ==========================================================================
 EXERCISE 16
 ==========================================================================
 
-SELECT INSERT(addressLine1, 1, 4, ROUND(RAND() * 10000)) FROM Address WHERE substr(addressLine1, 1, 1) = 5 AND substr(addressLine1, 5, 1) = " " AND addressLine1 NOT LIKE "%-%" LIMIT 10;     
+SELECT INSERT(addressLine1, 1, 4, ROUND(RAND() * 10000)) FROM Address WHERE substr(addressLine1, 1, 1) = 5 AND substr(addressLine1, 5, 1) = " " 
+AND addressLine1 NOT LIKE "%-%" LIMIT 10;     
 
 ==========================================================================
 EXERCISE 17
