@@ -647,7 +647,7 @@ SELECT (UNIX_TIMESTAMP(modifiedOn) - UNIX_TIMESTAMP(createdOn))/60/60/24 AS days
 SELECT name, (UNIX_TIMESTAMP(modifiedOn) - UNIX_TIMESTAMP(createdOn))/60/60/24 AS days, createdOn, modifiedOn from AddressBook LIMIT 100;
 
 ==========================================================================
-EXERCISE 14
+* EXERCISE 14
 ==========================================================================
 //Reverse all fax phone numbers, keeping the phone numbers in a valid format
 
@@ -662,9 +662,11 @@ select reverse(replace(replace(replace(replace(content," ", ""), ")", ""), "(", 
 //END FROM Phone WHERE subtype=‘fax';
 
 ==========================================================================
-EXERCISE 15
+* EXERCISE 15
 ==========================================================================
 //Transform all work emails into home emails and vice versa
+
+//ALTER TABLE does not seem to work
 
 ==========================================================================
 EXERCISE 16
@@ -679,3 +681,42 @@ EXERCISE 17
 //Return a list of adresses ordered by length of the combined columns addressLine1 and city
 
 mysql> select length(concat(addressLine1,city)), concat(addressLine1,city) FROM Address ORDER BY length(concat(addressLine1, city)) DESC;
+
+==========================================================================
+EXERCISE 18
+==========================================================================
+
+mysql> CREATE TABLE AccountCopy LIKE Account;  
+mysql> INSERT INTO AccountCopy SELECT * FROM Account; 
+
+mysql> update AccountCopy SET modifiedOn = "2016-04-27 19:40:00";                                                                                              
+Query OK, 1000 rows affected (0.01 sec)
+Rows matched: 1000  Changed: 1000  Warnings: 0
+
+mysql> select * FROM AccountCopy LIMIT 1;
++----+---------------------------------+-------------+---------------------+---------------------+
+| id | email                           | password    | createdOn           | modifiedOn          |
++----+---------------------------------+-------------+---------------------+---------------------+
+|  1 | Donec.vitae@Phasellusornare.org | LUW56VCP9SK | 2016-05-16 12:35:09 | 2016-04-27 19:40:00 |
++----+---------------------------------+-------------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+==========================================================================
+EXERCISE 19
+==========================================================================
+
+mysql> select DATE_FORMAT(modifiedOn,'%dth %y %a %d %c %j') FROM Account LIMIT 1; 
+
++-----------------------------------------------+
+| DATE_FORMAT(modifiedOn,'%dth %y %a %d %c %j') |
++-----------------------------------------------+
+| 15th 14 Sat 15 11 319                         |
++-----------------------------------------------+
+
+mysql> select DATE_FORMAT(createdOn,'%b %d %I:%i %p') FROM Account LIMIT 1; 
+
++-----------------------------------------+
+| DATE_FORMAT(createdOn,'%b %d %I:%i %p') |
++-----------------------------------------+
+| May 16 12:35 PM                         |
++-----------------------------------------+
